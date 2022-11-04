@@ -183,10 +183,6 @@ const detectBricks = () => {
           y: { a: brickLeft, b: brickRight, c: brickLeft + brickWidth / 2, w: brickWidth },
         };
 
-        // check only bottom-right brick
-        //if (col === 2 && row === 2) {
-        // Räkna ut om det är träff någonstans.
-        // Om träff räkna då ut vart träffen kom och studsa bollen i rätt riktning
         // TOP/BOTTOM LEFT || RIGHT
         if (
           ((b.y.c < br.y.c && br.y.a - b.y.a < b.y.w) || (b.y.c > br.y.c && b.y.b - br.y.b < b.y.w)) &&
@@ -195,22 +191,6 @@ const detectBricks = () => {
           bricks[col][row].hide = true;
           ballDirectionY = changeDirection(ballDirectionY);
         }
-        // if length of ball.left + brick.right > ball.width + brick.width = gap
-        // if length of ball.left + brick.right <
-        /*if (!(b.y.a + br.y.b > b.y.b - b.y.a + (br.y.b - br.y.a))) {
-            console.log("NO GAP Y, MAYBYE HIT!");
-          }*/
-        //}
-
-        // Below
-        /*if (ballTop() <= brickBottom - 2 || ballBottom() <= brickTop + 2) {
-          if (ballLeft() >= brickLeft - 2 && ballRight() <= brickRight + 2) {
-            bricks[col][row].hide = true;
-            ballDirectionY = changeDirection(ballDirectionY);
-          }
-        }*/
-
-        // Top
       }
     }
   }
