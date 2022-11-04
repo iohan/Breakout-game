@@ -179,14 +179,26 @@ const detectBricks = () => {
 
         // a = top/left points, b = bottom/right points, c = center points
         const br = {
-          x: { a: brickTop, b: brickBottom, c: brickTop + brickHeight / 2, w: brickHeight },
-          y: { a: brickLeft, b: brickRight, c: brickLeft + brickWidth / 2, w: brickWidth },
+          x: {
+            a: brickTop,
+            b: brickBottom,
+            c: brickTop + brickHeight / 2,
+            w: brickHeight,
+          },
+          y: {
+            a: brickLeft,
+            b: brickRight,
+            c: brickLeft + brickWidth / 2,
+            w: brickWidth,
+          },
         };
 
         // TOP/BOTTOM LEFT || RIGHT
         if (
-          ((b.y.c < br.y.c && br.y.a - b.y.a < b.y.w) || (b.y.c > br.y.c && b.y.b - br.y.b < b.y.w)) &&
-          ((b.x.c > br.x.c && b.x.b - br.x.b < b.x.w) || (b.x.c < br.x.c && br.x.a - b.x.a < b.x.w))
+          ((b.y.c < br.y.c && br.y.a - b.y.a < b.y.w) ||
+            (b.y.c > br.y.c && b.y.b - br.y.b < b.y.w)) &&
+          ((b.x.c > br.x.c && b.x.b - br.x.b < b.x.w) ||
+            (b.x.c < br.x.c && br.x.a - b.x.a < b.x.w))
         ) {
           bricks[col][row].hide = true;
           ballDirectionY = changeDirection(ballDirectionY);
@@ -198,7 +210,10 @@ const detectBricks = () => {
 
 const detectWalls = () => {
   // Right - Left
-  if (ballRight() >= wallRight() - ballSize / 2 || ballLeft() <= wallLeft() + ballSize / 2) {
+  if (
+    ballRight() >= wallRight() - ballSize / 2 ||
+    ballLeft() <= wallLeft() + ballSize / 2
+  ) {
     ballDirectionX = changeDirection(ballDirectionX);
   }
   // Top
@@ -214,7 +229,10 @@ const detectWalls = () => {
 
 const detectPlayer = () => {
   if (ballBottom() >= playerTop() - 2 && ballBottom() <= playerTop() + 2) {
-    if (ballLeft() >= playerLeft() - ballSize && ballRight() <= playerRight() + ballSize) {
+    if (
+      ballLeft() >= playerLeft() - ballSize &&
+      ballRight() <= playerRight() + ballSize
+    ) {
       ballDirectionY = changeDirection(ballDirectionY);
     }
   }
@@ -231,6 +249,7 @@ const collisionDetect = () => {
  */
 
 const keyDownHandler = (e) => {
+  e.preventDefault();
   if (e.key === "Left" || e.key === "ArrowLeft") {
     leftKeyPressed = true;
   } else if (e.key === "Right" || e.key === "ArrowRight") {
@@ -239,6 +258,7 @@ const keyDownHandler = (e) => {
 };
 
 const keyUpHandler = (e) => {
+  e.preventDefault();
   if (e.key === "Left" || e.key === "ArrowLeft") {
     leftKeyPressed = false;
   } else if (e.key === "Right" || e.key === "ArrowRight") {
